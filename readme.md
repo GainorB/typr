@@ -1,6 +1,6 @@
 # So You Think You Can Type? "Typr"
 ======
-![typing joke](http://img0.joyreactor.com/pics/post/full/comics-amazingsuperpowers-typing-job-526398.png)
+![typing joke][http://img0.joyreactor.com/pics/post/full/comics-amazingsuperpowers-typing-job-526398.png]
 
 ## Landing Page
 ------
