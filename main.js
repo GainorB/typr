@@ -1,120 +1,125 @@
-//window.onload = gameTimer;
-//document.addEventListener("click", gameTimer)
-
-$(document).ready(function(){
-    //When the page is loaded this section will get focused on
-    grabUserInput.focus();
-});
+console.log("main.js connected");
 
 /*
 GLOBAL VARIABLES
 */
-var timer = 120; //Set clock t0 120 seconds
-// var finished = false; //Game is Finished when True
-var score = 12; //User starts with 10 points: loses 1 point as the time goes, gains 2 points per correct word
-var typedKeys = ""; //Key press
+var charIndex; //Used to loop through letters array
+var letters; //Will be used as an array in newWord() to compare letters
+var timer = 60; //Set clock to 60 seconds
+var score = 0; //User starts with 0 points
 const wordsList = ["burger", "lunchtime", "happy", "supreme", "lamborghini", 
-                    "apple", "general", "assemb.ly", "jordan", 
-                    "floccinaucinihilipilification"]; //Words to spell correctly
-//Used to scan the wordsList array
-var max = 10; //Used in the getRandom Function used to set the maximum
-var min = 0; //Used in the getRandom Function used to set the minimum
-
+                    "apple", "general", "olamide", "jordan", "akanmu", "school", "textbook",
+                    "water", "trash", "phone", "samsung", "floor", "table"];
 /*
 GRAB DOM ELEMENTS
-*/
+*/ 
 var grabClock = document.getElementById('clock'); //grab the clock div
 var grabTypr = document.getElementById('typr'); //grab the typr div (where the wordsList shows)
 var grabOutput = document.getElementById('userOutput'); //grab the userOutput div (where the users key strokes show)
-var grabStartBTN = document.getElementById('start'); //grab the start button
-var grabResetBTN = document.getElementById('reset'); //grab the reset button
+var grabStartBTN = document.getElementById('start'); //grab start button
+var grabResetBTN = document.getElementById('reset'); //grab reset button
+var grabInstructionsBTN = document.getElementById('instructionsb'); //grab instructions button
 var grabUserInput = document.getElementById('userInput'); //grab userInput textfield
 var grabScore = document.getElementById('score'); //grab score div
 
 /*
 SET UP THE CLOCK
-The clock will start at 120 seconds and continue until 0 seconds.
-At 0 seconds, the game will end and all the initial varibles will reset.
+The clock will start at 60 seconds.
 */
 function gameTimer(){
     var interval = setInterval(function(){
-        timer -=1; //Decrement the clock by 1
-        score -=1; //Decrement score by 1 as the time goes
-        grabClock.innerHTML = "Time left:<br>"+timer+" seconds"; //Insert the timer into Clock Div
-        grabScore.innerHTML = "Your score:<br>"+score+" points";
+        timer--; //Decrement the clock by 1
+        grabClock.innerHTML = "Time left<br>"+timer+" seconds"; //Insert the timer
+        grabScore.innerHTML = "Your score<br>"+score+" points"; //Insert the score
         if(timer === 0){ //If the Timer is 0, The Game Is Over. Reset all game elements and display score.
             alert("Game over! Your Score is: " + score); //Alert the user the game is over
             grabClock.innerHTML = ""; //Clear the clock div
-            // finished = true; //Game is over
-            score = 12; //Reset score to 0
-            clearInterval(interval); //Stop the Interval
+            score = 0; //Reset score to 0
+            timer = 60; //Reset the clock
+            grabOutput.setAttribute('display', 'none'); //Hide the div (to prevent additional input) 
+            grabTypr.innerHTML = ""; //Clear the Typr div         
+            clearInterval(interval); //Stop the clock
+        } else if(timer === 50) { document.body.style.backgroundColor = "red"; } 
+          else if(timer === 40) { document.body.style.backgroundColor = "blue"; }
+          else if(timer === 30) { document.body.style.backgroundColor = "pink"; }
+          else if(timer === 20) { document.body.style.backgroundColor = "purple"; } 
+          else if(timer === 10) { 
+              document.body.style.backgroundImage = "url('images/distracting.gif')"; 
+              document.body.style.backgroundSize = "cover";
+              grabClock.style.color = "white";
+              grabScore.style.color = "white";
         }
-    }, 1000);
+    }, 1000); //60 seconds
 }
 
 /*
-PROVIDES A RANDOM NUMBER
+GENERATES A NEW WORD
 */
-function getRandom(){
-    return Math.floor(Math.random() * (max - min)) + min;
-}
-
-/*
-START THE GAME
-*/
-function startGame(){
-    console.log("Game started");
-
-    displayWords();
-}
-
-/*
-RESET THE GAME
-*/
-function resetGame(){
-    console.log("Reset game")
-
-    //Start the game over
-    startGame();
-
-    //Grab User's focus ?????????????????????????
-    grabUserInput.focus();
-
-    //Reset all game defaults
-    timer = 120;
-    score = 12;
+function newWord(){
+    //Clear the Div
     grabTypr.innerHTML = "";
-    grabClock.innerHTML = "";
+    //Initilize charIndex to 0
+    charIndex = 0;
+    //Create a random number
+	let random = Math.floor(Math.random() * wordsList.length);
+	
+    //Get's a random word, converts to upperCase, and splits word into an Array
+    letters = wordsList[random].toUpperCase().split('');
+    
+    //Give each letter a class
+    for(let i = 0; i < letters.length; i++)
+    {
+        var span = document.createElement("span");
+        span.classList.add("letter");
+        span.innerHTML = letters[i];
+        grabTypr.appendChild(span);
+    }
+    
+	//Clear the Div before the next word
     grabOutput.innerHTML = "";
 }
 
-function displayWords(){
-    grabTypr.innerHTML = wordsList[getRandom()];
-}
+/*
+JQUERY: WHEN DOCUMENT LOADS
+*/
+$(document).ready(function(){
+    //When the page is loaded this section will get focused on
+    grabOutput.focus();
+
+    //Toggle Instructions using JQuery
+    $('#instructionsb').click(function() {        
+         $('#instructionsd').toggle();
+    });
+
+    //Grab user input and store the input in event
+    document.addEventListener("keydown", function(event){
+    
+        //Converts the user input into a Character
+        let keyStr = String.fromCharCode(event.keyCode);
+        
+        //Compare a Letter with the keyStr to find a match
+        if(letters[charIndex] == keyStr){
+            charIndex++;
+           // grabOutput.innerHTML += keyStr;
+
+                let span = document.createElement("span");
+                span.classList.add("letter2");
+                span.innerHTML += keyStr;
+                grabOutput.appendChild(span);
+               
+            //if the index and length are equal then you've typed the full word
+            if(charIndex === letters.length){ 
+                score++;
+                newWord();
+            }
+        }
+    }); 
+});
 
 
+/*
+Errors: 
+1. Repeating words
+2. When game resets the timer speeds up
 
-
-
-// grabStartBTN.addEventListener("click", function(e){
-//       gameTimer();
-//       //random();
-//       grabStartBTN.disabled = true; 
-//      // document.addEventListener("keydown", typing, false);
-// });
-
-
-
-
-
-
-
-
-
-//   document.addEventListener("keydown", function(event) {
-//   console.log(event.which);
-//   document.getElementById('userOutput').innerHTML = `${event.which}`;
-//   if(event.which === 32){
-//     console.log('Yea!!!!');
-//   }
-// });
+*/
