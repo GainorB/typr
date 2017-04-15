@@ -10,8 +10,8 @@ class Game {
         //Focus on the input box
         grabOutput.focus();
         //Grab a new word
-        newWord();
-        //Disable buttons
+        words.newWord();
+        //Disable Start button
         grabStartBTN.disabled = true;
         //Start the timer
         gameTimer();
@@ -21,18 +21,22 @@ class Game {
     RESET THE GAME
     */
     resetGame(){
+        //Reloads the page
         location.reload();
         //Grab User's focus
         grabOutput.focus();
     }
 }
 
+//Initilize a new Game
 const game1 = new Game();
 
+//Click event for Start Button
 grabStartBTN.addEventListener("click", function(){
     game1.startGame(); 
 })
 
+//Click event for Reset Button
 grabResetBTN.addEventListener("click", function(){
     game1.resetGame(); 
 })

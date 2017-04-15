@@ -1,1 +1,39 @@
 console.log("word.js connected");
+
+class Word{
+    constructor(arr){
+        this.arr = [];
+    }
+
+    /*
+    GENERATES A NEW WORD
+    */
+    newWord(){
+        //Clear the Div
+        grabTypr.innerHTML = "";
+        //Initilize charIndex to 0
+        charIndex = 0;
+        //Create a random number
+        let random = Math.floor(Math.random() * wordsList.length);
+        //Get's a random word, converts to upperCase, and splits word into an Array
+        letters = wordsList[random].toUpperCase().split('');
+        //Give each letter a class for styling
+        for(let i = 0; i < letters.length; i++)
+        {
+            var span = document.createElement("span");
+            span.classList.add("letter");
+            span.innerHTML = letters[i];
+            grabTypr.appendChild(span);
+        }
+        //Clear the Div before the next word
+        grabOutput.innerHTML = "";
+    }
+}
+
+//Array of words
+const wordsList = ["burger", "lunchtime", "happy", "supreme", "lamborghini", 
+                    "apple", "general", "olamide", "jordan", "akanmu", "school", "textbook",
+                    "water", "trash", "phone", "samsung", "floor", "table"];
+
+//Initilize a new Word
+const words = new Word(wordsList);

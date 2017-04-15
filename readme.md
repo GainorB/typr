@@ -1,34 +1,17 @@
-# So You Think You Can Type? "Typr"
-![typing joke](./readme-assets/typing-joke.png)
+# Typr: Typing Game
 
-## LANDING PAGE
-* A blank page with a huge input bar (to accept user input). This is what the user will see when the game starts.
-* From there a list of simple directions will pop up and be dismissed by a user click
-* There will be a timer on the page aswell
-* Also want to display a virtual keyboard that logs your strokes as you type
-   * or in the input bar key strokes will be shown 
+## Technologies Used
+* HTML/CSS
+   * Used HTML as the framework of the website and CSS to style HTML elements.
+* JavaScript
+   * Used to grab DOM elements and the game logic.
+* JQuery
+   * Used specifically to toggle the instructions button and document on load events.
 
-## GAME PLAY
-* User has 2 minutes to type the words on the screen in the order they appear
-* Miss spelled words/letters subtract points
-* Correctly spelled words will grant additional points
-* There will be a way to store high scores and detailed stats
-* Background colors will also randomly change to attempt to distract users
-* User will be told how many words they would need to type correctly
-
-## STATS
-* Average typing speed
-* Number of correct words typed
-* Incorrectly typed words
-
-## HOW TO WIN
-* Correctly match all the words on the screen
-* Speed matters for high score/user satisfaction. The faster you finish the better your score.
-* You will get a bonus for finishing fast
-
-## HOW TO LOSE
-* Timer runs out
-* Too many incorrectly guessed words
-
-## RESET
-* Press ESC to quit the game/reset the game
+## Approach Taken
+1. Build an array with strings.
+2. Pick a random word from array.
+   * Used Math.random() to generate a random number between 0 and the Array length.
+3. Using String.split() to split the string into an array so each letter has an index.
+   * Each letter can now be compared, to the keyboard stroke.
+4. Use a keyboard event to compare to the split array's index.
