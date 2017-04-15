@@ -5,6 +5,9 @@ class Game {
     
     /*
     START THE GAME
+    1. USE FOCUS() TO FOCUS ON THE DIV WHERE THE USER IS TYPING
+    2. GENERATE A RANDOM WORD
+    3. START THE TIMER
     */
     startGame(){
         //Focus on the input box
@@ -19,6 +22,8 @@ class Game {
 
     /*
     RESET THE GAME
+    1. RELOAD THE PAGE
+    2. USE FOCUS() TO FOCUS ON THE DIV WHERE THE USER IS TYPING 
     */
     resetGame(){
         //Reloads the page

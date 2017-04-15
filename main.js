@@ -25,19 +25,15 @@ var grabh1 = document.querySelector('.typewriter'); //grab h1 element (header)
 var grabInstructionsD = document.getElementById('instructionsd'); //grab instructions div
 
 /*
-SET UP THE CLOCK
-The clock will start at 60 seconds.
+TIMER
 */
 function gameTimer(){
     var interval = setInterval(function(){
         timer--; //Decrement the clock by 1
         grabClock.innerHTML = "Time Left<br>"+timer+" seconds"; //Display timer
         grabScore.innerHTML = "Your Score<br>"+score+" points"; //Display score
-        finalScore.innerHTML = "Congrats! You scored "+score+" points"; //Display final score
+        finalScore.innerHTML = "Congrats! You scored "+score+" points."; //Display final score
         if(timer === 0){ //If the Timer is 0, The Game Is Over.
-            alert("Game over! Your Score is: " + score); //Alert the user the game is over
-            score = 0; //Reset score to 0
-            timer = 60; //Reset the clock
             ///////
             ///Hide/Show/Clear DOM elements when timer is 0
             ///////
@@ -92,8 +88,7 @@ $(document).ready(function(){
             let span = document.createElement("span");
             span.classList.add("letter2");
             span.innerHTML = key;
-            grabOutput.appendChild(span);
-               
+            grabOutput.appendChild(span);    
             //if the index and length are equal then you've typed the full word
             if(charIndex === letters.length){ 
                 score++;
