@@ -15,8 +15,8 @@ class Word{
     newWord(){
         //Clear the Div
         grabTypr.innerHTML = "";
-        //Initilize charIndex to 0
-        charIndex = 0;
+        //Initilize letterIndex to 0
+        letterIndex = 0;
         //Create a random number
         let random = Math.floor(Math.random() * wordsList.length);
         //Get's a random word, converts to upperCase, and splits word into an Array

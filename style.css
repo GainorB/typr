@@ -224,7 +224,7 @@ CONGRATS BANANA.GIF
     background-image: url(images/banana.gif);
     background-repeat: no-repeat;
     width: 350px; height: 350px;
-    display: none;
+    visibility: hidden;
     margin-top: 50px;
 }
 

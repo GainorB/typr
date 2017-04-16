@@ -3,8 +3,8 @@ console.log("main.js connected");
 /*
 GLOBAL VARIABLES
 */
-var charIndex; //Used to loop through letters array
-var letters; //Will be used as an array in newWord() to grab word from array and split word into a string
+var letterIndex; //Used to loop through letters array
+var letters; //Will be used as an array in newWord()
 var timer = 60; //Set clock to 60 seconds
 var score = 0; //User starts with 0 points
 
@@ -37,12 +37,18 @@ function gameTimer(){
             ///////
             ///Hide/Show/Clear DOM elements when timer is 0
             ///////
-            grabClock.innerHTML = "";
+            grabClock.style.visibility = "hidden";
             grabOutput.style.display = "none";
             grabTypr.style.display = "none";
             grabScore.style.display = "none";
-            grabCongrats.style.display = "block";
+            grabCongrats.style.visibility = "visible";
             grabh1.style.visibility = "hidden";
+            //Check for High Score
+            if ((window.localStorage.highscore) === undefined || score > window.localStorage.highscore){
+                highScore(score);
+                grabClock.style.visibility = "visible";
+                grabClock.innerHTML = "New High Score!<br>"+window.localStorage.highscore+" points!";
+            }
             clearInterval(interval); //Stops the clock
             ///////
             ///When the timer hits these values, change the background colors/images
@@ -62,6 +68,23 @@ function gameTimer(){
 }
 
 /*
+HIGH SCORE STORAGE
+*/
+function highScore(score){
+    //Checks to see if browser supports Local/Session Storage
+    if(typeof(Storage) !== "undefined"){
+        if(localStorage.highscore) {
+            //Store the highscore
+            localStorage.highscore = parseInt(score);
+        } else {
+            localStorage.highscore = 0;
+        }
+    } else {
+        console.log("Sorry, your browser does not support web storage...");
+    }
+}
+
+/*
 JQUERY: WHEN DOCUMENT LOADS
 */
 $(document).ready(function(){
@@ -70,18 +93,16 @@ $(document).ready(function(){
 
     //Toggle Instructions using JQuery
     $('#instructionsb').click(function(){        
-         $('#instructionsd').toggle();
+         $('#instructionsd').fadeToggle(1000);
     });
 
     //Grab user input and store the input in event
     document.addEventListener("keydown", function(event){
-
         //Converts the user input into a Character
         let key = String.fromCharCode(event.keyCode);
-        
-        //Compare a Letter with the key to find a match
-        if(letters[charIndex] == key){
-            charIndex++;
+        //Compare a Letter with the key to find a match        
+        if(letters[letterIndex] == key){
+            letterIndex++;
             ///////
             ///Add a Span to each typed character to style
             ///////
@@ -90,9 +111,9 @@ $(document).ready(function(){
             span.innerHTML = key;
             grabOutput.appendChild(span);    
             //if the index and length are equal then you've typed the full word
-            if(charIndex === letters.length){ 
-                score++;
+            if(letterIndex === letters.length){ 
                 words.newWord();
+                score++;
             }
         }
     }); 
