@@ -41,10 +41,8 @@
    * Reset Game, reloads the game
    * Instructions, toggles the instructions
 3. When Game starts, user has to type the displayed words
+4. When the timer hits 0, the game is over.
 
 ## Unsolved Problems
 1. Duplicate words
    * Not neccesarily a bad thing since its a typing game, a duplicated word only helps to improve the end user
-2. Can't log backspace on keydown event
-   * When a key is miss typed, the DELETE (or backspace) doesn't register so the letter can't get erased.
-3. Highlight letters in the WordArray as keys are pressed [wishlist]
