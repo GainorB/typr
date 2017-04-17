@@ -22,6 +22,9 @@
    * main.js
 
 ## Wireframes
+![Wire Frame 1](./readme-assets/wireframe1.JPG)
+![Wire Frame 2](./readme-assets/wireframe2.JPG)
+![Wire Frame 3](./readme-assets/wireframe3.JPG)
 
 ## How To Use Instructions
 1. Click the Instructions button: to toggle the instructions

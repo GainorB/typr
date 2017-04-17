@@ -69,6 +69,7 @@ function gameTimer(){
 
 /*
 HIGH SCORE STORAGE
+w3 schools!!
 */
 function highScore(score){
     //Checks to see if browser supports Local/Session Storage
@@ -102,14 +103,19 @@ $(document).ready(function(){
         let key = String.fromCharCode(event.keyCode);
         //Compare a Letter with the key to find a match        
         if(letters[letterIndex] == key){
-            letterIndex++;
             ///////
             ///Add a Span to each typed character to style
             ///////
             let span = document.createElement("span");
             span.classList.add("letter2");
             span.innerHTML = key;
-            grabOutput.appendChild(span);    
+            grabOutput.appendChild(span);  
+
+            if (letterIndex > 0) {
+                 document.getElementById(letterIndex-1).style.color = 'white';
+            }  
+            document.getElementById(letterIndex).style.color = 'red';
+            letterIndex++;
             //if the index and length are equal then you've typed the full word
             if(letterIndex === letters.length){ 
                 words.newWord();

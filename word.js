@@ -26,6 +26,7 @@ class Word{
         {
             var span = document.createElement("span");
             span.classList.add("letter");
+            span.setAttribute("id", i);
             span.innerHTML = letters[i];
             grabTypr.appendChild(span);
         }
