@@ -15,14 +15,14 @@ class Word{
     newWord(){
         //Clear the Div
         grabTypr.innerHTML = "";
-        //Initilize letterIndex to 0
+        //Initilize letterIndex
         letterIndex = 0;
         //Create a random number
         let random = Math.floor(Math.random() * wordsList.length);
         //Get's a random word, converts to upperCase, and splits word into an Array
         letters = wordsList[random].toUpperCase().split('');
         //Give each letter a class for styling
-        for(let i = 0; i < letters.length; i++)
+        for(let i = 0; i < letters.length; i+=1)
         {
             var span = document.createElement("span");
             span.classList.add("letter");

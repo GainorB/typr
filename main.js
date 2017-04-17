@@ -30,8 +30,8 @@ TIMER
 function gameTimer(){
     var interval = setInterval(function(){
         timer--; //Decrement the clock by 1
-        grabClock.innerHTML = "Time Left<br>"+timer+" seconds"; //Display timer
-        grabScore.innerHTML = "Your Score<br>"+score+" points"; //Display score
+        grabClock.innerHTML = timer+" seconds <br> remaining"; //Display timer
+        grabScore.innerHTML = score+" points"; //Display score
         finalScore.innerHTML = "Congrats! You scored "+score+" points."; //Display final score
         if(timer === 0){ //If the Timer is 0, The Game Is Over.
             ///////
@@ -44,10 +44,12 @@ function gameTimer(){
             grabCongrats.style.visibility = "visible";
             grabh1.style.visibility = "hidden";
             //Check for High Score
-            if ((window.localStorage.highscore) === undefined || score > window.localStorage.highscore){
+            if((window.localStorage.highscore) === undefined 
+                    || isNaN(window.localStorage.highscore)
+                    || score > window.localStorage.highscore){
                 highScore(score);
                 grabClock.style.visibility = "visible";
-                grabClock.innerHTML = "New High Score!<br>"+window.localStorage.highscore+" points!";
+                grabClock.innerHTML = "New High Score!<br>"+window.localStorage.highscore+" points";
             }
             clearInterval(interval); //Stops the clock
             ///////
@@ -69,12 +71,11 @@ function gameTimer(){
 
 /*
 HIGH SCORE STORAGE
-w3 schools!!
 */
 function highScore(score){
     //Checks to see if browser supports Local/Session Storage
     if(typeof(Storage) !== "undefined"){
-        if(localStorage.highscore) {
+        if(localStorage.highscore){
             //Store the highscore
             localStorage.highscore = parseInt(score);
         } else {
@@ -111,7 +112,7 @@ $(document).ready(function(){
             span.innerHTML = key;
             grabOutput.appendChild(span);  
 
-            if (letterIndex > 0) {
+            if(letterIndex > 0){
                  document.getElementById(letterIndex-1).style.color = 'white';
             }  
             document.getElementById(letterIndex).style.color = 'red';
