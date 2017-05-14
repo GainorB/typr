@@ -1,8 +1,9 @@
 console.log("word.js connected");
+var word;
 
 class Word{
-    constructor(arr){
-        this.arr = [];
+    constructor(word){
+        this.word = word;
     }
 
     /*
@@ -12,33 +13,39 @@ class Word{
     3. LOOP THROUGH EACH LETTER TO STYLE
     4. CLEAR THE DIV
     */
-    newWord(){
-        //Clear the Div
-        grabTypr.innerHTML = "";
-        //Initilize letterIndex
-        letterIndex = 0;
-        //Create a random number
-        let random = Math.floor(Math.random() * wordsList.length);
-        //Get's a random word, converts to upperCase, and splits word into an Array
-        letters = wordsList[random].toUpperCase().split('');
-        //Give each letter a class for styling
-        for(let i = 0; i < letters.length; i+=1)
-        {
-            var span = document.createElement("span");
-            span.classList.add("letter");
-            span.setAttribute("id", i);
-            span.innerHTML = letters[i];
-            grabTypr.appendChild(span);
+    newWord(word){
+            //Clear the Div
+            grabTypr.innerHTML = "";
+            //Initilize letterIndex
+            letterIndex = 0;
+            //Get's a random word, converts to upperCase, and splits word into an Array
+            letters = word.toUpperCase().split('');
+            //Give each letter a class for styling
+            for(let i = 0; i < letters.length; i+=1)
+            {
+                var span = document.createElement("span");
+                span.classList.add("letter");
+                span.setAttribute("id", i);
+                span.innerHTML = letters[i];
+                grabTypr.appendChild(span);
+            }
+            //Clear the Div before the next word
+            grabOutput.innerHTML = "";
         }
-        //Clear the Div before the next word
-        grabOutput.innerHTML = "";
-    }
+
+        // GRAB A NEW WORD FROM API
+        RandomWord(){
+            var length = 6;
+            var url = `http://setgetgo.com/randomword/get.php?len=${length}`;
+
+            $.ajax({
+                url: url
+            })
+            .done(function(word){
+                words.newWord(word);
+            });
+        }
 }
 
-//Array of words
-const wordsList = ["burger", "lunchtime", "happy", "supreme", "lamborghini", 
-                    "apple", "general", "olamide", "jordan", "akanmu", "school", "textbook",
-                    "water", "trash", "phone", "samsung", "floor", "table"];
-
 //Initilize a new Word
-const words = new Word(wordsList);
+const words = new Word(word);

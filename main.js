@@ -23,6 +23,25 @@ var finalScore = document.getElementById('finalscore'); //grab finalscore div
 var grabCongrats = document.getElementById('congratsd'); //grab congrats div
 var grabh1 = document.querySelector('.typewriter'); //grab h1 element (header)
 var grabInstructionsD = document.getElementById('instructionsd'); //grab instructions div
+var colors = ['red', 'lightblue', 'yellow', 'blue', 'pink', 'purple', 'orange', 'green', 'grey', 'burgundy']; //random colors for BG
+
+/*
+GENERATE A RANDOM BACKGROUND COLOR
+*/
+function randomBGC(arr){
+    const length = arr.length;
+    let random = Math.floor(Math.random() * length);
+    let newArr = [];
+
+    // GET A RANDOM COLOR FROM ARR
+    let randomC = arr[random];
+    // REMOVE RANDOM COLOR FROM ARR
+    let removedC = arr.splice((arr.indexOf(randomC)),1);
+    // INSERT RANDOM REMOVED COLOR INTO NEWARR
+    newArr.push(removedC);
+    
+    return newArr[0][0];
+}
 
 /*
 TIMER
@@ -55,10 +74,10 @@ function gameTimer(){
             ///////
             ///When the timer hits these values, change the background colors/images
             //////
-        } else if(timer === 50) { document.body.style.backgroundColor = "red"; } 
-          else if(timer === 40) { document.body.style.backgroundColor = "blue"; }
-          else if(timer === 30) { document.body.style.backgroundColor = "pink"; }
-          else if(timer === 20) { document.body.style.backgroundColor = "purple"; } 
+        } else if(timer === 50) { $('body').css({'background-color': randomBGC(colors) }); } 
+          else if(timer === 40) { $('body').css({'background-color': randomBGC(colors) }); } 
+          else if(timer === 30) { $('body').css({'background-color': randomBGC(colors) }); } 
+          else if(timer === 20) { $('body').css({'background-color': randomBGC(colors) }); }  
           else if(timer === 10) { 
               document.body.style.backgroundImage = "url('images/distracting.gif')"; 
               document.body.style.backgroundSize = "cover";
@@ -119,7 +138,7 @@ $(document).ready(function(){
             letterIndex++;
             //if the index and length are equal then you've typed the full word
             if(letterIndex === letters.length){ 
-                words.newWord();
+                words.RandomWord();
                 score++;
             }
         }

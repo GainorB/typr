@@ -13,7 +13,7 @@ class Game {
         //Focus on the input box
         grabOutput.focus();
         //Grab a new word
-        words.newWord();
+        words.RandomWord();
         //Disable Start button
         grabStartBTN.disabled = true;
         //Start the timer
