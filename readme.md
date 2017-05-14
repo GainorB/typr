@@ -42,7 +42,3 @@
    * Instructions, toggles the instructions
 3. When Game starts, user has to type the displayed words
 4. When the timer hits 0, the game is over.
-
-## Unsolved Problems
-1. Duplicate words
-   * Not neccesarily a bad thing since its a typing game, a duplicated word only helps to improve the end user

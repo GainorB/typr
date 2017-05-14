@@ -24,7 +24,6 @@ TYPEWRITER ANIMATION
 }
 
 .typewriter {
-    /*border: 1px solid black;*/
     width: 215px; height: 100px;
     margin: 0 auto;
     margin-top: 50px;
@@ -73,7 +72,7 @@ h1 {
 }
 
 /*
-WHERE WORDLIST IS DISPLAYED
+WHERE WORDS ARE DISPLAYED
 */
 #typr {
     /*border: 3px solid pink;*/
@@ -111,7 +110,7 @@ SCORE STYLING
 USERINPUT STYLING
 */
 #userOutput {
-    border: 2px dashed black;
+    border: 2px dotted black;
     top: 125px; left: 175px;
     width: 620px; height: 50px;
     padding: 5px;
