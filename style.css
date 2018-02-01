@@ -206,7 +206,7 @@ INSTRUCTIONS
 FINALSCORE
 */
 #finalscore {
-    border: 2px dashed black;
+    border: 2px dotted black;
     top: 125px; left: 175px;
     width: 620px; height: 50px;
     padding: 5px;
