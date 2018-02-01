@@ -35,7 +35,7 @@ class Word {
 
   // GRAB A NEW WORD FROM API
   RandomWord() {
-    var api_key = 'a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5';
+    var api_key = '19e4ca29e868049b580050e3fd50b7e0d3d27a4130593925a';
     var minLength = 1;
     var maxLength = 5; // null
     var maxDictionaryCount = -1; // null
